@@ -1,0 +1,17 @@
+---
+# src/content/lab-notes/vpc-ec2-provisioning.mdx
+title: "VPC & EC2 Provisioning Architecture"
+publishDate: "2026-05-14"
+awsServices: ["VPC", "EC2", "IAM"]
+description: "Documentation on setting up a custom Virtual Private Cloud with public and private subnets, and provisioning EC2 instances with strict IAM roles for security compliance."
+---
+
+This lab note documents the architecture and steps taken to provision a secure VPC environment.
+
+## Architecture Overview
+
+- **Public Subnet:** Contains the NAT Gateway and bastion hosts.
+- **Private Subnet:** Houses the application servers (EC2 instances) without direct internet access.
+- **Security Groups:** Configured to strictly allow SSH access only from the bastion host.
+
+_(Full documentation goes here...)_

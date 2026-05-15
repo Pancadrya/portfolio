@@ -1,0 +1,118 @@
+---
+// src/pages/lab-notes/[slug].astro
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+// 1. Fungsi ini wajib ada untuk memberi tahu Astro halaman apa saja yang harus di-build
+export async function getStaticPaths() {
+  const notes = await getCollection('lab-notes');
+  return notes.map(note => ({
+    params: { slug: note.id },
+    props: { note },
+  }));
+}
+
+// 2. Mengambil data dari catatan yang sedang diklik
+const { note } = Astro.props;
+
+// 3. Me-render isi Markdown/MDX menjadi komponen HTML
+const { Content } = await render(note);
+---
+
+<Layout>
+  <article class="max-w-3xl mx-auto py-10 animate-fade-in">
+    <!-- Tombol Back -->
+    <a href="/#lab-notes" class="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 text-sm font-medium mb-10 transition-colors">
+      <span>&larr;</span> Back to Home
+    </a>
+    
+    <!-- Header Artikel -->
+    <header class="mb-12 border-b border-gray-800 pb-8">
+      <div class="flex flex-wrap gap-2 mb-6">
+        {note.data.awsServices.map((service) => (
+          <span class="inline-flex items-center justify-center px-3 py-1.5 text-xs font-medium rounded-full bg-cyan-950/30 text-cyan-400 border border-cyan-800/50 whitespace-nowrap">
+            {service}
+          </span>
+        ))}
+      </div>
+      <h1 class="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">
+        {note.data.title}
+      </h1>
+      <time class="text-gray-500 font-mono text-sm">
+        {note.data.publishDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+      </time>
+    </header>
+
+    <!-- Isi Markdown / MDX -->
+    <div class="markdown-body">
+      <Content />
+    </div>
+  </article>
+</Layout>
+
+<style is:global>
+  /* Standarisasi Desain Markdown Manual */
+  .markdown-body {
+    color: #9ca3af; /* text-gray-400 */
+    font-size: 1.125rem; /* text-lg */
+    line-height: 1.8;
+  }
+  
+  .markdown-body h2 {
+    color: #ffffff;
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+  }
+  
+  .markdown-body h3 {
+    color: #e5e7eb;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .markdown-body p {
+    margin-bottom: 1.5rem;
+  }
+
+  /* Membuat list bullet lebih menjorok dan berjarak */
+  .markdown-body ul {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .markdown-body ol {
+    list-style-type: decimal;
+    padding-left: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .markdown-body li {
+    margin-bottom: 0.5rem;
+  }
+
+  /* Styling khusus untuk bold dan inline code (seperti max-age=180) */
+  .markdown-body strong {
+    color: #f3f4f6; /* text-gray-100 */
+    font-weight: 600;
+  }
+
+  .markdown-body code {
+    background-color: #111827; /* bg-gray-900 */
+    color: #22d3ee; /* text-cyan-400 */
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.25rem;
+    font-family: monospace;
+    font-size: 0.9em;
+  }
+
+  /* Garis pemisah (---) */
+  .markdown-body hr {
+    border-color: #374151; /* border-gray-700 */
+    margin: 3rem 0;
+  }
+</style>

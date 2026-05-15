@@ -1,0 +1,31 @@
+---
+title: "Qufy: Privacy-First RAG Document Chatbot"
+description: "A multi-user Retrieval-Augmented Generation (RAG) web application enabling interactive Q&A with PDF documents, powered entirely by local LLMs for strict data privacy."
+publishDate: "2025-09-19"
+techStack: ["IBM Granite", "LangChain", "PostgreSQL (pgvector)", "Docker", "Streamlit"]
+isFeatured: false
+githubUrl: "https://github.com/Pancadrya/qufy"
+---
+
+Qufy is an interactive web application designed to let users "talk" to their PDF documents. Built with a strict privacy-first approach, the entire Question & Answer process is powered by a Large Language Model (LLM) running 100% locally via Ollama, ensuring that sensitive document data is never transmitted to third-party servers.
+
+![Qufy Demo Video](https://github.com/user-attachments/assets/207aee12-3b16-4fe9-a32a-cb32b2afe73a)
+
+## 🏗️ Architecture & Tech Stack
+
+The application is engineered with a modern, scalable architecture prioritizing isolation and efficient resource orchestration:
+
+- **Containerized Infrastructure:** The Streamlit frontend and PostgreSQL database run within isolated Docker containers.
+- **Vector Database Engine:** Migrated from a file-based FAISS prototype to a robust **PostgreSQL** database leveraging the **pgvector** extension to store and query high-dimensional document embeddings.
+- **AI Orchestration:** Utilized **LangChain** to build the Retrieval-Augmented Generation (RAG) pipeline, connecting the document retriever with the local inference engine.
+- **Local Inference:** The application container securely communicates with the host machine's **Ollama** instance, utilizing the `ibm-granite-code:2b` foundation model for intelligent and contextual inference.
+
+## 🚀 Key Features
+
+- **Multi-User Workspaces:** Engineered a complete authentication system (registration/login) utilizing `bcrypt`, ensuring each user has securely isolated workspaces and chat histories.
+- **Persistent Chat History:** Leveraged relational database architecture to save and retrieve contextual chat sessions seamlessly.
+- **Rapid Iteration Pipeline:** Successfully scaled the project from a single-day proof-of-concept (using FAISS) into a production-ready, containerized multi-user application within 4 days.
+
+## 🎯 Technical Takeaways
+
+Building Qufy bridged the gap between AI development and Cloud Infrastructure. It demonstrated the complexities of implementing state-of-the-art **RAG architecture**, managing **Vector Databases**, and orchestrating multi-container **Docker** environments while strictly adhering to data privacy constraints. Furthermore, it proved that human-AI collaboration (utilizing models like Gemini and Granite as coding assistants) exponentially accelerates software development when paired with rigorous prompt engineering and critical validation.

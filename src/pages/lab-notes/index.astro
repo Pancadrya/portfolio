@@ -1,0 +1,63 @@
+---
+// src/pages/lab-notes/index.astro
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+// Mengambil semua catatan dan mengurutkannya dari yang terbaru
+const allNotes = await getCollection('lab-notes');
+const sortedNotes = allNotes.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
+---
+
+<Layout>
+  <div class="max-w-4xl mx-auto py-10 animate-fade-in">
+    
+    <!-- Header Halaman -->
+    <header class="mb-12">
+      <a href="/" class="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 text-sm font-medium mb-8 transition-colors">
+        <span>&larr;</span> Back to Home
+      </a>
+      <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">Digital Garden</h1>
+      <p class="text-xl text-gray-400 leading-relaxed">
+        A collection of my technical notes, AWS lab documentation, and cloud architecture experiments. This is where I document my continuous learning journey.
+      </p>
+    </header>
+
+    <!-- Grid Daftar Catatan -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {sortedNotes.map((note) => (
+        <a href={`/lab-notes/${note.id}`} class="group flex flex-col bg-gray-900/40 border border-gray-800 hover:border-gray-700 rounded-xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-cyan-900/10">
+          
+          <div class="flex gap-2 mb-4 flex-wrap">
+          {/* 1. Ambil maksimal 3 chip pertama */}
+          {note.data.awsServices.slice(0, 3).map((tech) => (
+            <span class="inline-flex items-center justify-center px-2.5 py-1 text-[11px] font-medium rounded-full bg-cyan-950/30 text-cyan-400 border border-cyan-800/50 whitespace-nowrap">
+              {tech}
+            </span>
+          ))}
+          
+          {/* 2. Hitung sisanya, jika lebih dari 0, tampilkan chip "+" */}
+          {note.data.awsServices.length > 3 && (
+            <span class="inline-flex items-center justify-center px-2 py-1 text-[11px] font-medium rounded-full bg-gray-900 text-gray-400 border border-gray-800 whitespace-nowrap">
+              +{note.data.awsServices.length - 3}
+            </span>
+          )}
+        </div>
+          </div>
+          
+          <h2 class="text-2xl font-bold text-gray-200 group-hover:text-cyan-400 transition-colors mb-3">
+            {note.data.title}
+          </h2>
+          
+          <p class="text-gray-400 text-sm mb-6 flex-grow">
+            {note.data.description}
+          </p>
+          
+          <div class="text-xs text-gray-500 font-mono pt-4 border-t border-gray-800/50 mt-auto">
+            Published on {note.data.publishDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+          </div>
+        </a>
+      ))}
+    </div>
+
+  </div>
+</Layout>

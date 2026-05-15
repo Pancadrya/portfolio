@@ -1,0 +1,25 @@
+---
+// src/layouts/Layout.astro
+import { ClientRouter } from 'astro:transitions';
+// INI WAJIB ADA:
+import '../styles/global.css';
+import Navbar from '../components/Navbar.astro';
+---
+
+<!doctype html>
+<html lang="en" class="dark scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Pancadrya Portfolio | Cloud & AI</title>
+    <ClientRouter/>
+  </head>
+  <body class="bg-gray-950 text-gray-100 antialiased selection:bg-cyan-500 selection:text-gray-950">
+    <!-- Ubah py-10 md:py-20 menjadi pt-8 md:pt-12 pb-20 -->
+    <Navbar />
+    <div class="mx-auto max-w-5xl px-6 md:px-12 pt-8 md:pt-12 pb-20">
+      <slot />
+    </div>
+  </body>
+</html>
