@@ -1,20 +1,48 @@
 ---
 title: "Medical Image Deepfake Detection using YOLOv11"
-description: "A deepfake manipulation detection system for medical imagery utilizing the state-of-the-art You Only Look Once (YOLO) version 11 architecture."
-publishDate: "2025-06-10"
-techStack: ["YOLOv11", "Python", "Computer Vision", "Deep Learning", "Ultralytics", "CT-Scan"]
+description: "A lightweight, binary classification system utilizing YOLOv11 to detect CT-GAN and Stable Diffusion manipulated lung CT scans, evaluated against potential model biases and visual masking techniques."
+publishDate: "2025-05-10"
+techStack: ["YOLOv11", "Deep Learning", "Optuna", "Computer Vision", "Python"]
 isFeatured: true
-githubUrl: "https://github.com/pancadrya"
 ---
 
 This project focuses on high-precision anomaly identification to ensure data integrity within healthcare environments.
 
-## Problem Statement
+## 📌 Problem Statement
 
-The rise of deepfake technology poses a significant threat to digital medical records. Manipulated medical images can lead to incorrect diagnoses.
+The rapid advancement of Generative AI has introduced severe security challenges to the healthcare sector, particularly the emergence of highly realistic medical deepfakes. Manipulated diagnostic imagery poses a direct threat to patient data security and clinical integrity.
 
-## Architecture
+This project tackles this vulnerability by implementing and fine-tuning **YOLOv11** to perform binary classification (Real vs. Fake) on Lung CT scans containing both benign and malignant cases. The model was rigorously stress-tested against sophisticated image manipulation techniques, specifically **CT-GAN** and **Stable Diffusion (SD)**.
 
-We utilized YOLOv11 for its real-time object inference capabilities and high accuracy in detecting subtle image manipulations.
+## 🛠️ Methodology & Pipeline
 
-_(Full case study content will be written here...)_
+The research utilized an experimental deep learning approach standard in modern computer vision pipelines:
+
+- **Data Pre-processing:** Aggregated and standardized real and fake Lung CT scans from public datasets.
+- **Model Training:** Conducted iterative training scenarios including default mixing and extended epochs to establish performance baselines.
+- **Hyperparameter Tuning:** Leveraged **Optuna** to dynamically optimize the model's parameters for peak accuracy.
+- **Robust Validation:** Implemented a **5-Fold Stratified Cross-Validation** to ensure the model's metrics were highly generalizable and immune to data leakage.
+
+## 📊 Performance Evaluation & Analysis
+
+Based on the numerical metrics and loss curves, the trained YOLOv11 model demonstrates strong competency in detecting highly realistic medical deepfakes. However, the evaluation highlights distinct behavior across different generative manipulation techniques:
+
+**Stable Diffusion (SD) Manipulation**
+
+- **Performance:** Achieved a perfect **100%** baseline across all primary metrics (Accuracy, Precision, Recall, and F1-Score).
+- **Overfitting & Leakage Audit:** While outstanding, this flawless result immediately raised concerns regarding potential data leakage or overfitting. To mitigate and verify this, strict preventative audits confirmed zero image overlap across data splits. Furthermore, an analysis of the train vs. validation loss graphs demonstrated stable, parallel convergence with no signs of divergence.
+- **Interpretation:** Despite the robust validation, this flawless outcome demands cautious interpretation, and subsequent evaluations in more diverse environments are recommended to guarantee absolute field reliability.
+
+**CT-GAN Manipulation & Model Bias**
+
+- **Performance Overview:** The baseline mixed default model achieved **91.38%** accuracy, while the hyperparameter-optimized model via Optuna reached **88.73%** accuracy. Notably, the specialized CT-GAN FM scenario peaked at a high accuracy of **99.29%**.
+- **Subtractive Manipulation Challenge:** While the model successfully identified additive manipulations (where tumor/cancer tissues were added), it faltered significantly when evaluating subtractive manipulations (where existing tumors were erased, creating fake benign cases).
+- **Visual Masking & Data Constraints:** This discrepancy occurs because the tumor deletion process leaves minimal visual traces. The CT-GAN architecture effectively uses localized noise patterns to blend and camouflage the erased regions, rendering them visually identical to healthy organic tissue. Additionally, this scenario was constrained by data scarcity, as the fake benign dataset volume was restricted to only one-third of the fake malign dataset, heavily limiting optimal model training in this specific domain.
+
+> **Validation Note:** To ensure these findings were statistically sound, a 5-Fold Stratified Cross-Validation was performed on the top non-SD scenarios. The results confirmed exceptional stability, showing a marginal accuracy drop of only **1.07% to 2.33%**, providing a realistic and reliable performance baseline for clinical deployment.
+
+## 🎯 Clinical Impact
+
+The overall high performance across the majority of testing scenarios proves that the dataset is highly representative and sufficient for optimal training. However, the performance drop in tumor deletion highlights a critical potential model bias showing that the architecture is naturally more sensitive to additive anomalies than subtractive ones.
+
+Acknowledging and addressing this bias is essential for developing bulletproof Deepfake Interceptors, ensuring hospital IT networks can safeguard the authenticity of patient diagnostics against all forms of generative tampering.

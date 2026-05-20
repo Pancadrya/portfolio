@@ -1,28 +1,47 @@
 ---
 title: "GreenEye: AI-Powered Indonesian Plant Recognition"
-description: "A mobile-based identification system utilizing a fine-tuned MobileNetV2 model to classify indigenous Indonesian flora through real-time camera inference."
+description: "A cloud-based computer vision system that identifies Indonesian plant species using a fine-tuned MobileNetV2 model integrated into a mobile application."
 publishDate: "2024-12-10"
-techStack: ["MobileNetV2", "TensorFlow Lite", "Python", "Computer Vision", "Edge AI"]
+techStack: ["MobileNetV2", "TensorFlow", "Python", "Computer Vision", "Cloud Inference"]
 isFeatured: true
-githubUrl: "https://github.com/pancadrya/greeneye-project"
+githubUrl: "https://github.com/shaammiru/greeneye-docs"
 ---
 
-GreenEye is an initiative designed to bridge the knowledge gap for laypeople regarding local vegetation. By leveraging the power of Computer Vision on mobile devices, users can instantly identify plants like pineapple (nanas), banana (pisang), and other Indonesian varieties simply by pointing their camera.
+GreenEye is an AI-powered plant recognition application designed to help users identify indigenous Indonesian flora through real-time image classification. By combining Computer Vision with a mobile-first user experience, the application enables users to recognize plants such as pineapple (_nanas_), banana (_pisang_), and other local species simply by using their smartphone camera.
+
+The project aims to make botanical knowledge more accessible to the public while demonstrating the practical application of deep learning in mobile-integrated environments.
 
 ## 🛠️ My Role: AI Engineer
 
-In this project, I was responsible for the end-to-end AI development lifecycle, focusing on making deep learning accessible on low-power devices:
+As the AI Engineer for this project, I was responsible for developing and optimizing the image classification pipeline used for plant recognition.
 
-- **Model Fine-Tuning:** I leveraged the **MobileNetV2** architecture—selected for its optimal balance between accuracy and resource efficiency—and performed fine-tuning on a curated dataset of Indonesian plants.
-- **Edge Optimization:** To ensure the app could run smoothly on standard smartphones, me and my team converted the trained model into **Keras** format, optimizing it for real-time mobile inference.
-- **Data Pipeline:** Curated and pre-processed plant imagery to ensure robust detection under various lighting conditions common in outdoor environments.
+### Key Responsibilities
+
+- **Model Development & Fine-Tuning**  
+  Fine-tuned the **MobileNetV2** architecture on a curated dataset of Indonesian plant species to achieve an efficient balance between classification accuracy and inference performance.
+
+- **Cloud-Based Inference Deployment**  
+  Prepared and optimized the trained model for server-side deployment, enabling real-time predictions for mobile users through cloud-hosted inference.
+
+- **Dataset Curation & Preprocessing**  
+  Collected, cleaned, and preprocessed plant imagery captured under varying environmental and lighting conditions to improve model robustness and generalization.
+
+- **Inference Workflow Integration**  
+  Contributed to the integration workflow between the mobile application and the AI inference service, ensuring responsive image classification results.
 
 ## 🚀 Key Features
 
-- **Real-time Identification:** Instant plant classification using the smartphone's camera feed.
-- **Plant Encyclopedia:** Provides detailed information about identified species, helping users learn about local biodiversity.
-- **User Experience:** Includes features to save favorite plants and share identification results with others.
+- **Real-Time Plant Identification**  
+  Users can capture or upload plant images and receive instant classification results powered by a deep learning model.
 
-## 🎯 Technical Takeaway
+- **Educational Plant Information**  
+  The application provides additional information about identified plant species to promote awareness of Indonesian biodiversity.
 
-This project deepened my understanding of **Edge AI**. It taught me that building a great model is only half the battle; the real challenge lies in optimizing that model to perform efficiently "at the edge" without relying on heavy cloud compute resources.
+- **Mobile-Centered User Experience**  
+  Designed to deliver a simple and accessible user experience for non-technical users interested in learning about local flora.
+
+## 🎯 Technical Takeaways
+
+Working on GreenEye strengthened my understanding of deploying Computer Vision models in real-world applications. Beyond training accurate models, I learned the importance of designing efficient inference pipelines, handling diverse image data, and balancing prediction responsiveness with deployment constraints in cloud-connected mobile systems.
+
+The project also gave me practical experience in applying deep learning to production-oriented workflows, particularly in the context of mobile-integrated AI services.

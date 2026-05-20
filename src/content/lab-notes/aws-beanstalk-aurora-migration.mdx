@@ -1,0 +1,66 @@
+---
+title: "Containerized App Migration to AWS Managed Services"
+publishDate: "2026-05-20"
+awsServices: ["Elastic Beanstalk", "Aurora Serverless", "ECR", "API Gateway", "Docker"]
+description: "Architectural migration from self-managed containers to AWS PaaS (Elastic Beanstalk) and Serverless databases (Aurora Serverless) for automated scalability."
+---
+
+## 📌 Project Description
+
+Manually orchestrating Docker containers on bare virtual instances (IaaS) often results in significant operational overhead. This project demonstrates the architectural migration from self-managed containers to AWS **Platform as a Service (PaaS)** and **Serverless** solutions to minimize maintenance burdens and automate scalability.
+
+The core focus of this project is deploying a containerized Node.js application using **AWS Elastic Beanstalk**, migrating the relational data tier to **Amazon Aurora Serverless**, and integrating the backend services with a static frontend utilizing **Amazon API Gateway**.
+
+## 🛠️ Tech Stack & AWS Services
+
+- **Compute & Container Management:** AWS Elastic Beanstalk, Amazon Elastic Container Registry (ECR), Docker.
+- **Database:** Amazon Aurora Serverless v2 (MySQL-Compatible).
+- **Networking & API:** Amazon API Gateway, Amazon VPC.
+- **Concepts:** PaaS (Platform as a Service), Serverless Databases, Stateful vs Stateless Architecture, Microservices Integration.
+
+---
+
+## 🏢 Business Scenario
+
+A web application (_Coffee Suppliers App_) was initially running entirely within Docker containers, including its MySQL database. However, running a relational database (which is inherently _stateful_) inside a dynamic container poses high risks to data persistence and reliability. To prepare for business growth, the architecture was re-engineered:
+
+1.  **Database Layer:** Migrated to Amazon Aurora Serverless to seamlessly scale compute capacity up or down based on transaction load, optimizing costs during idle periods.
+2.  **Web Tier:** The _stateless_ Node.js container was deployed to AWS Elastic Beanstalk, offloading load balancing and auto-scaling management entirely to AWS.
+3.  **Frontend Layer:** Hosted securely on Amazon S3, configured to communicate with the backend via a managed Amazon API Gateway.
+
+---
+
+## 🚀 Implementation Steps
+
+### Phase 1: Serverless Database Migration (Aurora Serverless)
+
+- Evaluated network topology to ensure the presence of subnets across multiple Availability Zones for High Availability.
+- Provisioned an **Amazon Aurora Serverless v2** (MySQL-compatible) cluster to replace the legacy containerized database.
+- Hardened Security Groups to guarantee the database only accepts internal connections specifically from the application instances (`port 3306`).
+- Interfaced with the Amazon RDS Query Editor and MySQL CLI to instantiate the schema (`suppliers`, `beans` tables) and execute the initial data seeding process.
+
+### Phase 2: PaaS Container Deployment via Elastic Beanstalk
+
+- Inspected and validated the Docker image of the Node.js application securely hosted within **Amazon ECR**.
+- Configured the necessary IAM Role (`aws-elasticbeanstalk-ec2-role`) to grant the Elastic Beanstalk environment the authorization required to pull images from the private ECR repository.
+- Automated the Elastic Beanstalk environment provisioning via the AWS CLI, injecting critical environment variables (such as `APP_DB_HOST` pointing to the Aurora Serverless endpoint).
+- Executed the deployment by crafting a `Dockerrun.aws.json` file, instructing Elastic Beanstalk to proxy incoming HTTP traffic from the native Load Balancer to the internal container port.
+
+> 💡 **Portfolio Tip:** Insert a screenshot of the "Health: OK" status from the AWS Elastic Beanstalk dashboard here.
+
+### Phase 3: API Gateway Proxy Integration
+
+- Configured **Amazon API Gateway** to act as the intermediary layer between the frontend application (S3) and the Elastic Beanstalk backend.
+- Provisioned a new resource (`/bean_products`) and established a `GET` method utilizing **HTTP Proxy Integration**.
+- Pointed the proxy endpoint URL to the Elastic Beanstalk domain to seamlessly route JSON payloads.
+- Enabled CORS (_Cross-Origin Resource Sharing_) and deployed the API to the production stage.
+
+> 💡 **Portfolio Tip:** Insert a screenshot of the API Gateway Method Execution diagram showing the client connecting to the HTTP Proxy here.
+
+---
+
+## 🎯 Results & Key Takeaways
+
+- **Architectural Modernization (Stateful vs Stateless):** Demonstrated advanced architectural understanding by decoupling the _stateless_ compute workloads (Docker/Elastic Beanstalk) from the _stateful_ data storage (Aurora Serverless).
+- **Operational Overhead Reduction (NoOps):** By leveraging Elastic Beanstalk and Aurora Serverless, the engineering team is relieved from manual OS patching, container orchestration, and database capacity planning.
+- **Microservices Integration:** Successfully stitched together distinct managed services (S3 Frontend, API Gateway, Beanstalk Backend, Aurora DB) into a cohesive, secure, and highly scalable application ecosystem.
