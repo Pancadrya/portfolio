@@ -1,6 +1,6 @@
 ---
 title: "CI/CD Pipeline Automation using AWS CodePipeline & CodeCommit"
-publishDate: "2026-05-20"
+publishDate: "2026-04-13"
 awsServices: ["CodePipeline", "CodeCommit", "S3", "CloudFront", "AWS CLI"]
 description: "Building a fully automated CI/CD pipeline architecture using native AWS developer tools to seamlessly deploy code changes to production with zero downtime."
 ---
@@ -34,7 +34,7 @@ A mid-sized business manages a public-facing website that requires frequent cont
 - Cloned the repository to the local development environment (VS Code) utilizing the HTTPS (GRC) protocol.
 - Executed the initial commit to establish the repository's foundational directory structure.
 
-> 💡 **Portfolio Tip:** Insert a screenshot of the CodeCommit console showing the "Commits" history here.
+![CI/CD Pipeline 1](../../../public/img/aws-cicd-pipeline-1.png)
 
 ### Phase 2: CI/CD Pipeline Configuration (Deploy)
 
@@ -55,7 +55,7 @@ A mid-sized business manages a public-facing website that requires frequent cont
 - Verified the live deployment by accessing the Amazon CloudFront distribution domain.
 - Utilized browser developer tools to inspect HTTP headers, successfully validating the `Cache-Control: max-age=14` implementation deployed by the pipeline.
 
-> 💡 **Portfolio Tip:** Insert a screenshot of the AWS CodePipeline showing the "Succeeded" status on both Source and Deploy stages.
+![CI/CD Pipeline 2](../../../public/img/aws-cicd-pipeline-2.png)
 
 ---
 

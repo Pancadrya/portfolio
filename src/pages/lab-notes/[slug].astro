@@ -110,6 +110,23 @@ const { Content } = await render(note);
     font-size: 0.9em;
   }
 
+  /* 2. Style untuk MULTIBARIS CODE CONTAINER (Kotak utama) */
+  .markdown-body pre {
+    padding: 0.5rem 1.25rem !important; /* Memberikan ruang lega di sisi dalam kotak */
+    border-radius: 0.5rem !important; /* Membuat sudut kotak lebih membulat (rounded-lg) */
+    overflow-x: auto !important; /* Memunculkan scrollbar jika kode terlalu panjang ke samping */
+    margin-top: 1rem; /* Jarak luar dengan paragraf di atasnya */
+    margin-bottom: 1rem; /* Jarak luar dengan paragraf di bawahnya */
+  }
+
+  /* 3. RESET style untuk teks di dalam kotak multibaris agar rapi */
+  .markdown-body pre code {
+    background-color: transparent !important; /* Menghilangkan bg ganda */
+    color: inherit !important; /* Menjaga warna syntax highlight bawaan */
+    padding: 0 !important; /* Menghilangkan padding ganda karena pre sudah punya padding */
+    border-radius: 0 !important; /* Menghilangkan border-radius ganda */
+  }
+
   /* Garis pemisah (---) */
   .markdown-body hr {
     border-color: #374151; /* border-gray-700 */

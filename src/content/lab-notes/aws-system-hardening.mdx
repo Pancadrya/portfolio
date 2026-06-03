@@ -1,6 +1,6 @@
 ---
 title: "Systems Hardening & Automated Patch Management using AWS Systems Manager"
-publishDate: "2026-05-20"
+publishDate: "2026-04-12"
 awsServices: ["Systems Manager", "EC2", "Patch Manager", "Fleet Manager"]
 description: "Automating OS updates, enforcing security policies, and maintaining compliance centrally across a multi-OS fleet (Linux and Windows) using AWS Systems Manager."
 ---
@@ -38,7 +38,7 @@ An organization operates a mixed fleet of Linux and Windows instances. To preven
 - Configured auto-approval rules with a 3-day delay for **Critical** and **Important** severity patches under the **SecurityUpdates** classification.
 - Associated this custom baseline with a newly designated Patch Group: `WindowsProd`.
 
-> 💡 **Portfolio Tip:** Insert a screenshot of the "Approval rules" configuration for Windows Server 2019 here.
+![AWS System Hardening 1](../../../public/img/aws-system-hardening-1.png)
 
 ### Phase 3: Automated Execution & Tagging Strategy
 
@@ -52,7 +52,7 @@ An organization operates a mixed fleet of Linux and Windows instances. To preven
 - Verified that the entire fleet (3 Linux instances and 3 Windows instances) successfully registered a **Compliant** status.
 - Analyzed node patching details to guarantee zero missed critical or security updates (0 _Critical/Security noncompliant count_).
 
-> 💡 **Portfolio Tip:** Insert a screenshot of the SSM Dashboard showing "Compliant: 6" here.
+![AWS System Hardening 2](../../../public/img/aws-system-hardening-2.png)
 
 ---
 

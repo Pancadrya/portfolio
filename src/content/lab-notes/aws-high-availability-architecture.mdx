@@ -1,6 +1,6 @@
 ---
 title: "Architecting a Highly Available & Fault-Tolerant Three-Tier Environment"
-publishDate: "2026-05-20"
+publishDate: "2026-04-19"
 awsServices: ["EC2", "Auto Scaling", "ALB", "RDS", "VPC"]
 description: "Transforming a monolithic application into a Highly Available (HA) and Fault-Tolerant Three-Tier Architecture across multiple Availability Zones."
 ---
@@ -25,10 +25,10 @@ I successfully implemented Load Balancing, Auto Scaling, Database Redundancy (Mu
 
 A critical inventory application was originally running on a single server, creating a Single Point of Failure (SPOF). If the server or its host Availability Zone experienced an outage, the application would face complete downtime. The enterprise required an architectural redesign so the application could:
 
-1. Distribute incoming web traffic automatically.
-2. Recover failed servers autonomously (self-healing).
-3. Protect data against a single database instance failure.
-4. Decouple the web, application, and database tiers using security best practices (Defense in Depth).
+- Distribute incoming web traffic automatically.
+- Recover failed servers autonomously (self-healing).
+- Protect data against a single database instance failure.
+- Decouple the web, application, and database tiers using security best practices (Defense in Depth).
 
 ---
 
@@ -67,7 +67,7 @@ A critical inventory application was originally running on a single server, crea
 - Validated that the ALB immediately drained traffic from the dead instance and routed all users to the healthy instance, resulting in zero end-user disruption.
 - Observed AWS Auto Scaling detect the capacity deficit and autonomously launch a replacement instance (_self-healing_) to restore the cluster to its Desired State (2 instances).
 
-> 💡 **Portfolio Tip:** Insert a screenshot of the final comprehensive architecture diagram (usually provided in the lab or recreated via draw.io) showcasing the ALB, Private Subnet ASG, Multi-AZ RDS, and Dual NAT Gateways here.
+![AWS High Availability Architecture](../../../public/img/aws-high-availability-architecture-1.png)
 
 ---
 

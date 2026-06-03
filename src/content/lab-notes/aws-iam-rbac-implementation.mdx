@@ -1,6 +1,6 @@
 ---
 title: "Identity and Access Management (IAM) & Role-Based Access Control (RBAC) Implementation"
-publishDate: "2026-05-20"
+publishDate: "2026-04-15"
 awsServices: ["IAM", "EC2", "S3", "Security"]
 description: "Implementing AWS Identity and Access Management (IAM) to architect a security posture based on the principles of Least Privilege and Role-Based Access Control (RBAC)."
 ---
@@ -43,7 +43,7 @@ A rapidly growing tech enterprise is aggressively scaling its utilization of Ama
 - Applied **AWS Managed Policies** (`AmazonS3ReadOnlyAccess` and `AmazonEC2ReadOnlyAccess`) for the Support tiers, ensuring automatic policy updates mapped by AWS.
 - Engineered a highly granular **Customer Inline Policy** (`EC2-Admin-Policy`) specifically for the Administrator group to strictly govern `ec2:Describe*`, `ec2:StartInstances`, and `ec2:StopInstances` API actions.
 
-> 💡 **Portfolio Tip:** Insert a screenshot of the JSON format of the EC2-Admin Customer Inline Policy here to demonstrate your ability to read and write IAM syntax.
+![AWS IAM 1](../../../public/img/aws-iam-rbac-implementation-1.png)
 
 ### Phase 3: Identity Mapping (User Assignment)
 
@@ -57,7 +57,7 @@ A rapidly growing tech enterprise is aggressively scaling its utilization of Ama
 - **user-2 Validation (EC2 Support):** Successfully visualized EC2 metrics and instance lists, but API calls were explicitly blocked when attempting to execute a `Stop Instance` action.
 - **user-3 Validation (EC2 Admin):** Successfully executed infrastructure intervention by legally invoking the Stop state on an EC2 instance.
 
-> 💡 **Portfolio Tip:** Insert a screenshot of the "Failed to stop the instance. You are not authorized..." error message when logged in as user-2. This perfectly visualizes your security guardrails working in action.
+![AWS IAM 2](../../../public/img/aws-iam-rbac-implementation-2.png)
 
 ---
 

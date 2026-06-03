@@ -1,6 +1,6 @@
 ---
 title: "Cloud Infrastructure Monitoring & Alerting Automation using AWS CloudWatch and SNS"
-publishDate: "2026-05-20"
+publishDate: "2026-04-17"
 awsServices: ["CloudWatch", "SNS", "EC2", "Systems Manager"]
 description: "Implementing proactive infrastructure monitoring and automated incident response using Amazon CloudWatch and Amazon SNS to detect anomalous CPU spikes."
 ---
@@ -9,7 +9,7 @@ description: "Implementing proactive infrastructure monitoring and automated inc
 
 Visibility into system health and performance (_Observability_) is critical for reliable cloud operations. This project demonstrates the implementation of proactive infrastructure monitoring and automated incident response using **Amazon CloudWatch** and **Amazon Simple Notification Service (SNS)**.
 
-Through this experiment, I engineered an alerting system designed to detect anomalous CPU spikes on Amazon EC2 instances—a common indicator of cyberattacks (e.g., _crypto-jacking malware_) or unexpected traffic surges—and automatically dispatch real-time notifications to the administrative team.
+Through this experiment, I engineered an alerting system designed to detect anomalous CPU spikes on Amazon EC2 instances as a common indicator of cyberattacks (e.g., _crypto-jacking malware_) or unexpected traffic surges and automatically dispatch real-time notifications to the administrative team.
 
 ## 🛠️ Tech Stack & AWS Services
 
@@ -40,7 +40,7 @@ A company experienced an incident where a production server was compromised and 
 - Established a static threshold condition: If the _Average_ CPU usage remains > 60% for a consecutive 1-minute period, the alarm state transitions to **In alarm**.
 - Configured the alarm action to seamlessly trigger a message payload to the SNS topic established in Phase 1.
 
-> 💡 **Portfolio Tip:** Insert a screenshot of the CloudWatch Alarm graph showing the red threshold line at 60% here.
+![AWS Infra Monitoring 1](../../../public/img/aws-cloud-infra-monitoring-1.png)
 
 ### Phase 3: Incident Simulation (Stress Testing) & Validation
 
@@ -49,7 +49,7 @@ A company experienced an incident where a production server was compromised and 
 - Monitored state changes within the CloudWatch console. Validated that the alarm successfully triggered (transitioned to **In alarm** status) within the defined time window.
 - Verified successful integration by receiving the automated email alert from AWS Notifications in the designated inbox.
 
-> 💡 **Portfolio Tip:** Insert a screenshot of the actual AWS SNS email alert received in your inbox here.
+![AWS Infra Monitoring 2](../../../public/img/aws-cloud-infra-monitoring-2.png)
 
 ### Phase 4: Centralized Observability Dashboard Creation
 

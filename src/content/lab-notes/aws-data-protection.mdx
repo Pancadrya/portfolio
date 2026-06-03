@@ -1,6 +1,6 @@
 ---
 title: "Data Protection & Cryptography using AWS KMS and Encryption CLI"
-publishDate: "2026-05-20"
+publishDate: "2026-04-14"
 awsServices: ["KMS", "Encryption CLI", "EC2", "IAM", "Systems Manager"]
 description: "Implementing file encryption and decryption processes directly on an EC2 server using AWS Key Management Service (KMS) and the AWS Encryption CLI to protect data-at-rest."
 ---
@@ -32,7 +32,7 @@ An organization stores sensitive data within a File Server running on Amazon EC2
 - Provisioned a **Symmetric Encryption Key** within AWS KMS, utilizing the same key for both encryption and decryption to maximize speed and operational efficiency.
 - Configured the key alias (`MyKMSKey`) and strictly attached administrative and usage permissions to a specific IAM Role, strictly adhering to the principle of _least privilege_.
 
-> 💡 **Portfolio Tip:** Insert a screenshot of the AWS KMS console showing the key status as "Enabled" along with its ARN here.
+![AWS KMS 1](../../../public/img/aws-data-protection-1.png)
 
 ### Phase 2: File Server Configuration & AWS Encryption CLI
 
@@ -47,7 +47,7 @@ An organization stores sensitive data within a File Server running on Amazon EC2
 - Applied the `--commitment-policy require-encrypt-require-decrypt` parameter to enforce enhanced security measures during the cryptographic operation.
 - Validated the output: The original file was successfully transformed into _ciphertext_ (`secret1.txt.encrypted`), rendering it completely unreadable to unauthorized users.
 
-> 💡 **Portfolio Tip:** Insert a terminal screenshot showing the unreadable, randomized characters (ciphertext) of the encrypted file here.
+![AWS KMS 2](../../../public/img/aws-data-protection-2.png)
 
 ### Phase 4: Decryption Operations (Ciphertext to Plaintext)
 
