@@ -24,7 +24,7 @@ const sortedNotes = allNotes.sort((a, b) => b.data.publishDate.valueOf() - a.dat
     <!-- Grid Daftar Catatan -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       {sortedNotes.map((note) => (
-        <a href={`/digital-garden/${note.id}`} class="group flex flex-col bg-gray-900/40 border border-gray-800 hover:border-gray-700 rounded-xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-cyan-900/10">
+        <a href={`/portfolio/digital-garden/${note.id}`} class="group flex flex-col bg-gray-900/40 border border-gray-800 hover:border-gray-700 rounded-xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-cyan-900/10">
           
           <div class="flex gap-2 mb-4 flex-wrap">
           {/* 1. Ambil maksimal 3 chip pertama */}
