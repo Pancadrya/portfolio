@@ -1,6 +1,6 @@
 ---
 title: "Cloud Observability, Automated Alerting & Infrastructure Compliance"
-publishDate: "2026-05-20"
+publishDate: "2026-04-22"
 awsServices: ["CloudWatch", "Systems Manager", "AWS Config", "SNS", "EC2"]
 description: "Implementing a comprehensive Observability and Governance ecosystem, including automated agent deployment, log analytics, event-driven alerting, and continuous compliance auditing."
 ---
@@ -31,7 +31,7 @@ An e-commerce enterprise required deep visibility into their web server fleet. T
 ### Phase 1: Automated Agent Provisioning (AWS Systems Manager)
 
 - Eliminated manual installation toil by leveraging **SSM Run Command** to deploy the `AmazonCloudWatchAgent` across target instances remotely.
-- Centralized the CloudWatch Agent JSON configuration file within the **SSM Parameter Store** (`Monitor-Web-Server`). This configuration instructed the agent to ship web server logs (Access & Error) and internal system metrics (CPU iowait, Memory utilization, Disk space) that are natively invisible to standard EC2 metrics.
+- Centralized the CloudWatch Agent JSON configuration file within the **SSM Parameter Store** (`Monitor-Web-Server`). This configuration instructed the agent to ship web server logs (Access & Error) and internal system metrics (CPU iowait, memory utilization, disk space) that are natively invisible to standard EC2 metrics.
 
 ### Phase 2: Log Analytics & Automated Alerting (CloudWatch Logs)
 
@@ -48,11 +48,11 @@ An e-commerce enterprise required deep visibility into their web server fleet. T
 
 - Activated **AWS Config** to continuously record infrastructure configurations and evaluate them against internal corporate policies.
 - Deployed two managed compliance rules:
-  1.  `required-tags`: Audited all resources to enforce the presence of a `project` tag (critical for cost allocation and billing).
-  2.  `ec2-volume-inuse-check`: Scanned the environment for Amazon EBS volumes not attached to any EC2 instance, preventing cloud waste and ghost billing (FinOps best practices).
+  - `required-tags`: Audited all resources to enforce the presence of a `project` tag (critical for cost allocation and billing).
+  - `ec2-volume-inuse-check`: Scanned the environment for Amazon EBS volumes not attached to any EC2 instance, preventing cloud waste and ghost billing (FinOps best practices).
 - Reviewed the reporting dashboard to identify both **Compliant** and **Non-compliant** resources.
 
-> 💡 **Portfolio Tip:** Insert a screenshot of the AWS Config Dashboard showing the "Non-compliant resources" list for the ec2-volume-inuse-check rule here.
+![Cloud Observability 1](../../../public/img/aws-observability-compliance-1.png)
 
 ---
 

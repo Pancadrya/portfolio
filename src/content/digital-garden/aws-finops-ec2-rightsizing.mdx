@@ -1,6 +1,6 @@
 ---
 title: "Cloud Cost Optimization & FinOps: EC2 Rightsizing using the AWS CLI"
-publishDate: "2026-05-20"
+publishDate: "2026-04-25"
 awsServices: ["EC2", "Pricing Calculator", "AWS CLI", "EBS"]
 description: "Demonstrating practical FinOps principles through rigorous resource rightsizing, legacy workload cleanup, and TCO validation."
 ---
@@ -37,16 +37,22 @@ A web application recently completed its database migration to a managed service
 ### Phase 2: CLI-Driven Infrastructure Rightsizing
 
 - Utilized the **AWS CLI** from an isolated management host to execute infrastructure operations programmatically, bypassing the AWS Management Console.
-- Queried the AWS API to extract the exact `InstanceId` based on the server's Name tag.
+- Queried the AWS API to extract the exact `InstanceId` based on the server's name tag.
 - Safely halted the instance using the `aws ec2 stop-instances` command.
 - Executed the rightsizing operation by issuing the `aws ec2 modify-instance-attribute` command, successfully downgrading the instance type to a lower specification tier.
 - Restarted the instance and validated the new configuration state and dynamic Public IP using the `aws ec2 describe-instances` command.
 
 ### Phase 3: TCO Analysis & FinOps Projection
 
-- Leveraged the **AWS Pricing Calculator** to model the financial architecture both pre- and post-optimization.
+- Leveraged the **AWS Pricing Calculator** to model the financial architecture both previous and post-optimization.
 - **Pre-Optimization:** Running the legacy EC2 compute instance ($19.18) with its attached EBS volume ($54.86) yielded a total estimated cost of **$74.04/month**.
+
+  ![AWS FinOps 1](../../../public/img/aws-finops-ec2-rightsizing-1.png)
+
 - **Post-Optimization:** Running the rightsized EC2 compute instance ($9.59) alongside the same EBS volume ($54.86) reduced the total cost to **$64.45/month**.
+
+  ![AWS FinOps 2](../../../public/img/aws-finops-ec2-rightsizing-2.png)
+
 - **Results:** Slashed the EC2 compute costs by exactly 50%, successfully projecting a continuous **$9.59** monthly cost reduction (~13% overall savings on this specific server).
 
 ---

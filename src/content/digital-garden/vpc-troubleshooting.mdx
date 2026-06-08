@@ -1,6 +1,6 @@
 ---
 title: "Advanced VPC Troubleshooting & Network Traffic Analysis using VPC Flow Logs"
-publishDate: "2026-01-15"
+publishDate: "2026-04-28"
 awsServices: ["EC2", "VPC", "S3"]
 description: "Foundational documentation on configuring a Virtual Private Cloud and deploying secure EC2 instances from scratch."
 ---
@@ -45,11 +45,15 @@ A web server residing in a Public Subnet suddenly became inaccessible via web br
 - Analyzed subnet-level network controls using `aws ec2 describe-network-acls` and discovered a rogue Deny rule interfering with inbound traffic on Port 22.
 - Eradicated the faulty NACL entry using `aws ec2 delete-network-acl-entry`, successfully restoring EC2 Instance Connect functionality.
 
+![AWS VPC Troubleshooting 1](../../../public/img/vpc-troubleshooting-1.png)
+
 ### Phase 4: Traffic Log Forensics (Traffic Analysis)
 
 - Bulk-downloaded and extracted the compressed VPC Flow Logs (`.log.gz`) from Amazon S3 to the local machine.
 - Utilized Linux forensic techniques (`grep -rn`) to parse through thousands of log lines, filtering for packets with a `REJECT` status on port `22` originating from my local IP address.
 - Converted UNIX timestamps within the logs using the `date -d` utility to historically validate the exact timeframe of the blocking incidents.
+
+![AWS VPC Troubleshooting 2](../../../public/img/vpc-troubleshooting-2.png)
 
 ---
 

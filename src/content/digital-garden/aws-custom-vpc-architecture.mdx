@@ -1,6 +1,6 @@
 ---
 title: "Custom VPC Architecture & Secure Network Design on AWS"
-publishDate: "2026-05-20"
+publishDate: "2026-04-21"
 awsServices: ["VPC", "EC2", "NAT Gateway", "Security"]
 description: "Designing and implementing a logically isolated custom Amazon VPC with public and private subnets, NAT Gateways, and a Bastion Host for secure remote access."
 ---
@@ -24,8 +24,8 @@ Throughout this experiment, I provisioned Public and Private Subnets, engineered
 
 An enterprise requires a secure cloud environment to host its internal applications and databases. Deploying all servers on a public-facing network poses an unacceptable security risk. To mitigate this, the network architecture was designed to segregate servers into two distinct tiers:
 
-1.  **Public Tier:** Houses only resources that require direct inbound internet access (e.g., Load Balancers or Bastion Hosts).
-2.  **Private Tier:** Houses backend application servers and databases. This tier is completely shielded from inbound internet access but retains the ability to securely download external software updates via a proxy.
+- **Public Tier:** Houses only resources that require direct inbound internet access (e.g., Load Balancers or Bastion Hosts).
+- **Private Tier:** Houses backend application servers and databases. This tier is completely shielded from inbound internet access but retains the ability to securely download external software updates via a proxy.
 
 ---
 
@@ -37,6 +37,8 @@ An enterprise requires a secure cloud environment to host its internal applicati
 - Partitioned the VPC network into two highly specific subnets within the same Availability Zone:
   - **Public Subnet** (`10.0.0.0/24`): Configured to automatically assign public IPv4 addresses to launched instances.
   - **Private Subnet** (`10.0.2.0/23`): Designed with a larger capacity (512 IP addresses) to accommodate backend workloads, strictly without public IP assignments.
+
+![AWS Costum VPC 1](../../../public/img/aws-custom-vpc-architecture-1.png)
 
 ### Phase 2: Public Internet Connectivity (IGW & Route Tables)
 
@@ -58,7 +60,7 @@ An enterprise requires a secure cloud environment to host its internal applicati
 
 - Launched a test instance (_Private Instance_) exclusively within the Private Subnet, configuring its Security Group to **only** accept inbound SSH connections originating from the internal VPC CIDR (`10.0.0.0/16`).
 - Executed secure network penetration: Connected to the Bastion Host via EC2 Instance Connect, then performed an _SSH-jump_ directly into the private IP address of the Private Instance.
-- Validated NAT Gateway functionality by executing a `ping -c 3 amazon.com` command from within the private instance, successfully verifying that ICMP echo responses were returned (proving the system could securely communicate with the outside world).
+- Validated NAT Gateway functionality by executing a `ping -c 3 google.com` command from within the private instance, successfully verifying that ICMP echo responses were returned (proving the system could securely communicate with the outside world).
 
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: "Global Content Delivery & Web Security using CloudFront and AWS WAF"
-publishDate: "2026-05-15"
+publishDate: "2026-04-27"
 awsServices: ["CloudFront", "WAF", "S3", "API Gateway"]
 description: "Implementing a global CDN to reduce latency, enforcing HTTPS, and securing S3 origins/APIs using strict IP-based Web ACLs and Edge Computing."
 ---
@@ -34,22 +34,30 @@ A café website hosted on Amazon S3 experienced high latency for global users an
 - Configured an **Amazon CloudFront** distribution to serve the static website from an Amazon S3 bucket, enabling low-latency global content delivery over HTTPS.
 - Implemented _Zero-Trust_ principles on the Origin: Modified the Amazon S3 Bucket Policy to explicitly block all direct public access. The S3 bucket now strictly serves requests routed exclusively through the CloudFront network.
 
+![AWS CDN 1](../../../public/img/cloudfront-waf-edge-1.png)
+
 ### Phase 2: Application Security via AWS WAF (IP Allowlisting)
 
 - Configured **AWS WAF** to shield the application from unsolicited network traffic during development.
 - **CloudFront WAF:** Created a Global Web ACL and IP Set that whitelisted only the office's public IP address. Unrecognized external traffic (e.g., cellular networks) was automatically blocked with a `403 Forbidden` response.
 - **API Gateway WAF:** Secured the backend REST API endpoints by provisioning a Regional Web ACL enforcing the exact same IP Allowlist validation, thereby protecting sensitive JSON data payloads.
 
+![AWS CDN 2](../../../public/img/cloudfront-waf-edge-2.png)
+
 ### Phase 3: Edge Computing with CloudFront Functions
 
 - Implemented lightweight compute logic at edge locations using **CloudFront Functions** (triggered on the _Viewer Response_ event).
 - Authored an isolated JavaScript function that dynamically injects a randomized HTTP Cookie (`the_image`) into the user's browser. This cookie allows the frontend to dynamically rotate promotional images without requiring any backend API calls.
+
+![AWS CDN 3](../../../public/img/cloudfront-waf-edge-3.png)
 
 ### Phase 4: Cache-Control Optimization via AWS CLI
 
 - Optimized the website's caching behavior by bulk-updating the HTTP object metadata.
 - Leveraged the **AWS CLI** to execute a `copy-object` operation, replacing the `Cache-Control` directive on all S3 objects to `max-age=180` (3 minutes).
 - Validated the cache configuration via Browser Developer Tools, successfully verifying that CloudFront returned the `x-cache: Hit from cloudfront` header (object served directly from the edge cache) and `RefreshHit from cloudfront` (expired object revalidated with the origin).
+
+![AWS CDN 4](../../../public/img/cloudfront-waf-edge-4.png)
 
 ---
 

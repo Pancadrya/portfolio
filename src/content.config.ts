@@ -14,8 +14,8 @@ const projectsCollection = defineCollection({
   }),
 });
 
-const labNotesCollection = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/lab-notes" }),
+const digitalGardenCollection = defineCollection({
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/digital-garden" }),
   schema: z.object({
     title: z.string(),
     publishDate: z.coerce.date(),
@@ -27,5 +27,5 @@ const labNotesCollection = defineCollection({
 // WAJIB ADA: Ini yang diminta oleh Astro (yang bikin error undefined tadi)
 export const collections = {
   projects: projectsCollection,
-  "lab-notes": labNotesCollection,
+  "digital-garden": digitalGardenCollection,
 };

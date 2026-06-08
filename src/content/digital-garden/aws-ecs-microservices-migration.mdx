@@ -1,6 +1,6 @@
 ---
 title: "Application Modernization: Monolith to Microservices on ECS"
-publishDate: "2026-05-20"
+publishDate: "2026-04-24"
 awsServices: ["ECS", "ECR", "ALB", "Docker", "Node.js"]
 description: "A comprehensive modernization journey refactoring a monolithic Node.js application into a microservices architecture orchestrated by Amazon ECS."
 ---
@@ -40,10 +40,14 @@ A message board application running directly on a Node.js server faced severe sc
 - Audited the codebase architecture and logically split the RESTful API routing code into three independent microservices entities: `Users`, `Threads`, and `Posts`.
 - Replicated the Phase 1 procedures to provision separate ECR repositories (`mb-users-repo`, `mb-threads-repo`, `mb-posts-repo`), built the distinct Docker images for each service, and uploaded them.
 
+![AWS Microservice Migration 1](../../../public/img/aws-ecs-microservices-migration-1.png)
+
 ### Phase 3: Amazon ECS Cluster & Task Definition Setup
 
 - Provisioned an **Amazon ECS** compute cluster (`mb-ecs-cluster`) backed by Amazon EC2 instances.
 - Delegated resources by creating isolated **Task Definitions** for each microservice (`mb-users-task`, `mb-posts-task`, `mb-threads-task`), explicitly allocating 0.5 vCPU, 1GB of Memory, and configuring container port mappings (`3000`).
+
+![AWS Microservice Migration 2](../../../public/img/aws-ecs-microservices-migration-2.png)
 
 ### Phase 4: Service Deployment & Path-Based Routing (ALB)
 
@@ -53,6 +57,9 @@ A message board application running directly on a Node.js server faced severe sc
   - Requests matching `/api/users*` were forwarded to `mb-users-target`.
   - Requests matching `/api/posts*` were forwarded to `mb-posts-target`.
   - Requests matching `/api/threads*` were forwarded to `mb-threads-target`.
+
+  ![AWS Microservice Migration 3](../../../public/img/aws-ecs-microservices-migration-3.png)
+
 - Decommissioned the legacy monolithic service (setting _Desired Tasks_ to `0`) to completely cut over all workloads to the newly decoupled microservices architecture.
 
 ---

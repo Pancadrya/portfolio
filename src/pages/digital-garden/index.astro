@@ -1,10 +1,10 @@
 ---
-// src/pages/lab-notes/index.astro
+// src/pages/digital-garden/index.astro
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 
 // Mengambil semua catatan dan mengurutkannya dari yang terbaru
-const allNotes = await getCollection('lab-notes');
+const allNotes = await getCollection('digital-garden');
 const sortedNotes = allNotes.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
 ---
 
@@ -18,14 +18,13 @@ const sortedNotes = allNotes.sort((a, b) => b.data.publishDate.valueOf() - a.dat
       </a>
       <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">Digital Garden</h1>
       <p class="text-xl text-gray-400 leading-relaxed">
-        A collection of my technical notes, AWS lab documentation, and cloud architecture experiments. This is where I document my continuous learning journey.
-      </p>
+      A collection of my technical notes, lab documentation, and architecture experiments. This is where I document my continuous learning journey.      </p>
     </header>
 
     <!-- Grid Daftar Catatan -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       {sortedNotes.map((note) => (
-        <a href={`/lab-notes/${note.id}`} class="group flex flex-col bg-gray-900/40 border border-gray-800 hover:border-gray-700 rounded-xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-cyan-900/10">
+        <a href={`/digital-garden/${note.id}`} class="group flex flex-col bg-gray-900/40 border border-gray-800 hover:border-gray-700 rounded-xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-cyan-900/10">
           
           <div class="flex gap-2 mb-4 flex-wrap">
           {/* 1. Ambil maksimal 3 chip pertama */}

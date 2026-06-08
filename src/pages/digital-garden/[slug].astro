@@ -1,11 +1,11 @@
 ---
-// src/pages/lab-notes/[slug].astro
+// src/pages/digital-garden/[slug].astro
 import { getCollection, render } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 
 // 1. Fungsi ini wajib ada untuk memberi tahu Astro halaman apa saja yang harus di-build
 export async function getStaticPaths() {
-  const notes = await getCollection('lab-notes');
+  const notes = await getCollection('digital-garden');
   return notes.map(note => ({
     params: { slug: note.id },
     props: { note },
@@ -22,8 +22,8 @@ const { Content } = await render(note);
 <Layout>
   <article class="max-w-3xl mx-auto py-10 animate-fade-in">
     <!-- Tombol Back -->
-    <a href="/#lab-notes" class="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 text-sm font-medium mb-10 transition-colors">
-      <span>&larr;</span> Back to Home
+    <a href="/digital-garden" class="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 text-sm font-medium mb-10 transition-colors">
+      <span>&larr;</span> Back to Digital Garden
     </a>
     
     <!-- Header Artikel -->

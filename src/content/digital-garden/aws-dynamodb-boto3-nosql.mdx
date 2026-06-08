@@ -1,6 +1,6 @@
 ---
 title: "Serverless NoSQL Database Management using Amazon DynamoDB and Boto3"
-publishDate: "2026-05-20"
+publishDate: "2026-05-03"
 awsServices: ["DynamoDB", "Boto3 (Python)", "AWS CLI", "NoSQL"]
 description: "Demonstrating the design, manipulation, and optimization of Amazon DynamoDB using the AWS SDK for Python (Boto3) and the AWS CLI."
 ---
@@ -38,6 +38,8 @@ A café website currently loads its menu statically via a JSON file stored on Am
 - Utilized the AWS CLI (`aws dynamodb put-item`) to insert the initial data payload into the table.
 - Enforced data protection mechanisms by appending the `ConditionExpression='attribute_not_exists(product_name)'` parameter using Boto3. This rule prevents the `put_item` command from accidentally overwriting data if the product name already exists, returning a `ConditionalCheckFailedException` error when duplication is detected.
 
+![AWS DynamoDB 1](../../../public/img/aws-dynamodb-boto3-nosql-1.png)
+
 ### Phase 3: Bulk Data Processing (Batch Write)
 
 - Automated the ingestion of multiple products into the database using the `batch_writer()` method.
@@ -45,11 +47,15 @@ A café website currently loads its menu statically via a JSON file stored on Am
 - Implemented a _fail-fast_ approach: The script was engineered to fail immediately and return a `ValidationException` warning if duplicates existed in the load queue, ensuring data integrity remained pristine from the start.
 - Successfully ingested dozens of product records post-JSON data cleansing.
 
+![AWS DynamoDB 2](../../../public/img/aws-dynamodb-boto3-nosql-2.png)
+
 ### Phase 4: Query Optimization & Global Secondary Index (GSI)
 
 - Authored a `scan()` function to retrieve all data rows, implementing programmatic pagination (processing data via a `LastEvaluatedKey` while loop) to elegantly handle DynamoDB's 1MB size limit.
 - **Optimization:** To prevent costly full-table scans (_RCU/Read Capacity Units_ waste) when querying for promotional menus, I provisioned a **Global Secondary Index (GSI)** named `special_GSI` utilizing `special` as the Hash Key.
 - Implemented a **Sparse Index**: Utilized a targeted `scan()` method against the newly created GSI, coupled with a `FilterExpression=Not(Attr('tags').contains('out of stock'))`. This allowed the application to exclusively surface "special" menus that are "in stock", vastly minimizing database latency and operational costs.
+
+![AWS DynamoDB 3](../../../public/img/aws-dynamodb-boto3-nosql-3.png)
 
 ---
 

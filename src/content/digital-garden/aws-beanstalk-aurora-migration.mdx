@@ -1,6 +1,6 @@
 ---
 title: "Containerized App Migration to AWS Managed Services"
-publishDate: "2026-05-20"
+publishDate: "2026-04-20"
 awsServices: ["Elastic Beanstalk", "Aurora Serverless", "ECR", "API Gateway", "Docker"]
 description: "Architectural migration from self-managed containers to AWS PaaS (Elastic Beanstalk) and Serverless databases (Aurora Serverless) for automated scalability."
 ---
@@ -46,7 +46,7 @@ A web application (_Coffee Suppliers App_) was initially running entirely within
 - Automated the Elastic Beanstalk environment provisioning via the AWS CLI, injecting critical environment variables (such as `APP_DB_HOST` pointing to the Aurora Serverless endpoint).
 - Executed the deployment by crafting a `Dockerrun.aws.json` file, instructing Elastic Beanstalk to proxy incoming HTTP traffic from the native Load Balancer to the internal container port.
 
-> 💡 **Portfolio Tip:** Insert a screenshot of the "Health: OK" status from the AWS Elastic Beanstalk dashboard here.
+![AWS Containerized App Migration 1](../../../public/img/aws-beanstalk-aurora-migration-1.png)
 
 ### Phase 3: API Gateway Proxy Integration
 
@@ -55,7 +55,7 @@ A web application (_Coffee Suppliers App_) was initially running entirely within
 - Pointed the proxy endpoint URL to the Elastic Beanstalk domain to seamlessly route JSON payloads.
 - Enabled CORS (_Cross-Origin Resource Sharing_) and deployed the API to the production stage.
 
-> 💡 **Portfolio Tip:** Insert a screenshot of the API Gateway Method Execution diagram showing the client connecting to the HTTP Proxy here.
+![AWS Containerized App Migration 2](../../../public/img/aws-beanstalk-aurora-migration-2.png)
 
 ---
 

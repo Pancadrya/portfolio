@@ -1,6 +1,6 @@
 ---
 title: "Secure Static Website Hosting & Automation using Amazon S3 and Boto3"
-publishDate: "2026-05-20"
+publishDate: "2026-04-30"
 awsServices: ["S3", "IAM", "AWS CLI", "Boto3 (Python)"]
 description: "Implementing Amazon S3 for static website hosting, enforcing IP-based access security, and automating content deployment using Python (Boto3) and the AWS CLI."
 ---
@@ -41,17 +41,23 @@ A local café aims to establish an online presence by launching a prototype webs
 - Embedded a secondary statement block (`Deny`) to block access to a specific file (`report.html`) unless requested via a cryptographically signed _Presigned URL_.
 - Executed a custom **Python (Boto3)** script to seamlessly inject and apply the JSON security policy to the target bucket.
 
+![AWS S3 Static Web 1](../../../public/img/aws-s3-boto3-automation-1.png)
+
 ### Phase 3: Automated Artifact Deployment (AWS CLI)
 
 - Performed a bulk deployment of the static web artifacts into S3.
 - Leveraged the AWS CLI (`aws s3 cp ... --recursive`) to recursively upload the entire source tree (HTML, JS, CSS, and graphics) to the bucket.
 - Simultaneously injected custom HTTP Header metadata (`--cache-control "max-age=0"`) onto every object. This prevented browser caching, ensuring clients always retrieved the latest iteration of files during active development.
 
+![AWS S3 Static Web 2](../../../public/img/aws-s3-boto3-automation-2.png)
+
 ### Phase 4: Network & Security Validation
 
 - Validated website availability by accessing the Amazon S3 **Object URL** in a browser connected to the whitelisted local network (successfully loading the DOM and JS assets).
 - Conducted external network Penetration Testing: Dispatched a `GET` request using the `curl` utility directly from the isolated Cloud9 terminal.
 - Proved the security perimeter functioned as designed, as Amazon S3 immediately rejected the request with an `AccessDenied` error for originating outside the whitelisted IP address.
+
+![AWS S3 Static Web 3](../../../public/img/aws-s3-boto3-automation-3.png)
 
 ---
 

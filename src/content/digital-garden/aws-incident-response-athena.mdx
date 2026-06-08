@@ -1,6 +1,6 @@
 ---
 title: "Cloud Incident Response & Forensic Investigation using AWS CloudTrail and Athena"
-publishDate: "2026-05-20"
+publishDate: "2026-04-23"
 awsServices: ["CloudTrail", "Athena", "IAM", "S3", "EC2", "Security"]
 description: "An end-to-end incident response workflow investigating a website defacement and unauthorized access using AWS CloudTrail, Amazon Athena, and Linux forensics."
 ---
@@ -15,22 +15,10 @@ The workflow combined AWS CloudTrail auditing, Amazon Athena log analysis, and L
 
 ## 🛠️ Tech Stack & AWS Services
 
-### AWS Services
-
-- AWS CloudTrail
-- AWS IAM
-- Amazon Athena
-- Amazon S3
-- Amazon EC2
-
-### Tools & Concepts
-
-- Linux Forensics (`grep`, `gunzip`, `who`, `kill`, `vi`)
-- Incident Response
-- Security Group Hardening
-- SSH Security Configuration
-- Serverless SQL Querying
-- Audit Log Analysis
+- **Compute & Access:** Amazon EC2 (Target Instance & Forensics Workstation), AWS IAM (Identity & Access Management).
+- **Storage & Analytics:** Amazon S3 (Log Repository), Amazon Athena (Serverless SQL Querying).
+- **Security & Auditing:** AWS CloudTrail (Audit Log Analysis), VPC Security Groups (Hardening).
+- **Tools & Concepts:** Incident Response, Linux Forensics (`grep`, `gunzip`, `who`, `kill`, `vi`), SSH Security Configuration.
 
 ---
 
@@ -49,7 +37,7 @@ The objective of the investigation was to:
 
 ## 🚀 Implementation
 
-### 1. Incident Detection & Initial Triage
+### Phase 1: Incident Detection & Initial Triage
 
 - Identified unauthorized modifications on the web application frontend.
 - Investigated EC2 Security Group configurations and discovered an overly permissive inbound SSH rule.
@@ -58,7 +46,7 @@ The objective of the investigation was to:
 
 ---
 
-### 2. CloudTrail Log Investigation using Linux CLI
+### Phase 2: CloudTrail Log Investigation using Linux CLI
 
 - Established a secure SSH session to the affected EC2 instance.
 - Downloaded compressed CloudTrail log files from Amazon S3 using:
@@ -81,9 +69,11 @@ The objective of the investigation was to:
   ```
   to identify Security Group-related API actions.
 
+![AWS Incident Response 1](../../../public/img/aws-incident-response-athena-1.png)
+
 ---
 
-### 3. Large-Scale Log Analysis using Amazon Athena
+### Phase 3: Large-Scale Log Analysis using Amazon Athena
 
 - Created an external table in Amazon Athena to query CloudTrail logs stored in Amazon S3.
 - Used SQL queries to analyze infrastructure modification events and identify suspicious activity.
@@ -103,11 +93,11 @@ ORDER BY eventtime DESC;
   - The timestamp of the unauthorized infrastructure change
 - Correlated findings with the `AuthorizeSecurityGroupIngress` API event.
 
-> 💡 Portfolio Tip: Include a screenshot of the Amazon Athena query results highlighting the Security Group modification events and associated IAM identity.
+![AWS Incident Response 2](../../../public/img/aws-incident-response-athena-2.png)
 
 ---
 
-### 4. System Remediation & Security Hardening
+### Phase 4: System Remediation & Security Hardening
 
 #### OS-Level Investigation & Remediation
 
@@ -144,6 +134,8 @@ ORDER BY eventtime DESC;
 - Removed the overly permissive Security Group rule allowing public SSH access.
 - Deleted the compromised IAM identity associated with the incident.
 - Restored the original web application assets from backup files.
+
+![AWS Incident Response 3](../../../public/img/aws-incident-response-athena-3.png)
 
 ---
 
