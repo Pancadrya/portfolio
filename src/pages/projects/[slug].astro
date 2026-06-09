@@ -52,13 +52,13 @@ const hasGithub = project.data.githubUrl !== undefined;
     </header>
 
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
-      <div class="lg:col-span-8">
+      <div class="order-2 lg:order-1 lg:col-span-8">
         <div class="markdown-body">
           <Content />
         </div>
       </div>
       
-      <aside class="lg:col-span-4 space-y-6">
+      <aside class="order-1 lg:order-2 lg:col-span-4 space-y-6">
         <div class="bg-gray-900/50 border border-gray-800 rounded-xl p-6">
           <h3 class="text-sm font-bold text-gray-400 uppercase tracking-wider mb-4">Project Overview</h3>
           <ul class="space-y-4 text-sm text-gray-300">
@@ -81,28 +81,51 @@ const hasGithub = project.data.githubUrl !== undefined;
 </Layout>
 
 <style is:global>
-  /* Pertahankan styling markdown-body dari sebelumnya di sini */
-  .markdown-body { color: #9ca3af; font-size: 1.125rem; line-height: 1.8; }
+  /* 1. FIX MOBILE: Paksa kata/URL panjang agar turun ke baris baru */
+  .markdown-body { 
+    color: #9ca3af; 
+    font-size: 1.125rem; 
+    line-height: 1.8; 
+    overflow-wrap: break-word; 
+    word-wrap: break-word;
+  }
+  
   .markdown-body h2 { color: #ffffff; font-size: 1.75rem; font-weight: 700; margin-top: 3rem; margin-bottom: 1rem; }
   .markdown-body p { margin-bottom: 1.5rem; }
   .markdown-body ul { list-style-type: disc; padding-left: 1.5rem; margin-bottom: 2rem; }
   .markdown-body li { margin-bottom: 0.5rem; }
   .markdown-body strong { color: #f3f4f6; font-weight: 600; }
-  /* (Lanjutkan dengan CSS markdown yang sudah ada) */
-    /* 2. Style untuk MULTIBARIS CODE CONTAINER (Kotak utama) */
-  .markdown-body pre {
-    padding: 1.25rem !important; /* Memberikan ruang lega di sisi dalam kotak */
-    border-radius: 0.5rem !important; /* Membuat sudut kotak lebih membulat (rounded-lg) */
-    overflow-x: auto !important; /* Memunculkan scrollbar jika kode terlalu panjang ke samping */
-    margin-top: 1rem; /* Jarak luar dengan paragraf di atasnya */
-    margin-bottom: 1rem; /* Jarak luar dengan paragraf di bawahnya */
+  
+  /* 2. FIX MOBILE: Pastikan gambar tidak pernah lebih lebar dari layar HP */
+  .markdown-body img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
   }
 
-  /* 3. RESET style untuk teks di dalam kotak multibaris agar rapi */
+  /* 3. FIX MOBILE: Pastikan inline code (kode berlatar belakang di dalam teks) mau ditekuk */
+  .markdown-body :not(pre) > code {
+    word-break: break-word;
+    white-space: pre-wrap;
+  }
+
+  /* 4. Style untuk MULTIBARIS CODE CONTAINER (Kotak utama) */
+  .markdown-body pre {
+    padding: 1.25rem !important; 
+    border-radius: 0.5rem !important; 
+    overflow-x: auto !important; 
+    margin-top: 1rem; 
+    margin-bottom: 1rem;
+    max-width: 100%; /* FIX MOBILE: Cegah kotak kode meluber ke luar layar */
+  }
+
+  /* 5. RESET style untuk teks di dalam kotak multibaris agar rapi */
   .markdown-body pre code {
-    background-color: transparent !important; /* Menghilangkan bg ganda */
-    color: inherit !important; /* Menjaga warna syntax highlight bawaan */
-    padding: 0 !important; /* Menghilangkan padding ganda karena pre sudah punya padding */
-    border-radius: 0 !important; /* Menghilangkan border-radius ganda */
+    background-color: transparent !important; 
+    color: inherit !important; 
+    padding: 0 !important; 
+    border-radius: 0 !important; 
+    word-break: normal !important; /* Biarkan kode multibaris tetap utuh dan bisa di-scroll ke kanan */
+    white-space: pre !important; 
   }
 </style>

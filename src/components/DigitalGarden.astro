@@ -10,7 +10,7 @@ const sortedNotes = allNotes.sort((a, b) => b.data.publishDate.valueOf() - a.dat
 const recentNotes = sortedNotes.slice(0, 3);
 ---
 
-<section id="digital-garden" class="py-10 md:py-12 border-t border-gray-800/50">
+<section id="digital-garden" class="py-10 md:py-12 border-t border-gray-800/50 scroll-mt-8">
   <div class="flex items-center justify-between mb-10">
     <div>
       <h2 class="text-3xl font-bold text-white mb-2">Digital Garden</h2>
@@ -28,18 +28,18 @@ const recentNotes = sortedNotes.slice(0, 3);
       <a href={`/portfolio/digital-garden/${note.id}`} class="group block bg-gray-900/40 border border-gray-800 hover:border-gray-700 rounded-xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-cyan-900/10">
         
         <!-- AWS Services Tags -->
-       <div class="flex gap-2 mb-4 flex-wrap">
-          {/* 1. Ambil maksimal 3 chip pertama */}
-          {note.data.awsServices.slice(0, 3).map((tech) => (
-            <span class="inline-flex items-center justify-center px-2.5 py-1 text-[11px] font-medium rounded-full bg-cyan-950/30 text-cyan-400 border border-cyan-800/50 whitespace-nowrap">
+       <div class="flex gap-2 mb-4 flex-wrap overflow-hidden">
+          {/* 1. Ambil maksimal 2 chip pertama */}
+          {note.data.awsServices.slice(0, 2).map((tech) => (
+            <span class="inline-flex items-center justify-center px-2.5 py-1 text-[11px] font-medium rounded-full bg-cyan-950/30 text-cyan-400 border border-cyan-800/50 whitespace-nowrap truncate max-w-[120px]">
               {tech}
             </span>
           ))}
           
           {/* 2. Hitung sisanya, jika lebih dari 0, tampilkan chip "+" */}
-          {note.data.awsServices.length > 3 && (
-            <span class="inline-flex items-center justify-center px-2 py-1 text-[11px] font-medium rounded-full bg-gray-900 text-gray-400 border border-gray-800 whitespace-nowrap">
-              +{note.data.awsServices.length - 3}
+          {note.data.awsServices.length > 2 && (
+            <span class="inline-flex items-center justify-center px-2 py-1 text-[11px] font-medium rounded-full bg-gray-900 text-gray-400 border border-gray-800 whitespace-nowrap shrink-0">
+              +{note.data.awsServices.length - 2}
             </span>
           )}
         </div>
@@ -63,7 +63,7 @@ const recentNotes = sortedNotes.slice(0, 3);
   <!-- Tombol "View All" untuk layar HP -->
   <div class="mt-8 md:hidden text-center">
     <a href="/portfolio/digital-garden" class="inline-block text-cyan-400 hover:text-cyan-300 text-sm font-medium transition-colors">
-      View All Notes &rarr;
+      View Digital Garden &rarr;
     </a>
   </div>
 </section>
