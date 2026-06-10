@@ -2,8 +2,8 @@ import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
 import tailwindcss from "@tailwindcss/vite";
 
-/astro.build/config
-https: export default defineConfig({
+// https://astro.build/config
+export default defineConfig({
   site: "https://pancadrya.my.id",
   base: "/",
 
