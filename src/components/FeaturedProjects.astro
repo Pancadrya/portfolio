@@ -15,14 +15,14 @@ const featuredProjects = allProjects
       <h2 class="text-3xl font-bold text-white mb-2">Featured Projects</h2>
       <p class="text-gray-400">Selected works in AI, Computer Vision, and Cloud.</p>
     </div>
-    <a href="/portfolio/projects" class="hidden md:block text-cyan-400 hover:text-cyan-300 text-sm font-medium transition-colors">
+    <a href="/projects" class="hidden md:block text-cyan-400 hover:text-cyan-300 text-sm font-medium transition-colors">
       View All Projects &rarr;
     </a>
   </div>
 
   <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
     {featuredProjects.map((project) => (
-      <a href={`/portfolio/projects/${project.id}`} class="group flex flex-col bg-gray-900/40 border border-gray-800 hover:border-gray-700 rounded-xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-cyan-900/10">
+      <a href={`/projects/${project.id}`} class="group flex flex-col bg-gray-900/40 border border-gray-800 hover:border-gray-700 rounded-xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-cyan-900/10">
         
        <div class="flex gap-2 mb-4 flex-wrap">
           {/* 1. Ambil maksimal 3 chip pertama */}
@@ -55,7 +55,7 @@ const featuredProjects = allProjects
   </div>
   
   <div class="mt-8 md:hidden text-center">
-    <a href="/portfolio/projects" class="inline-block text-cyan-400 hover:text-cyan-300 text-sm font-medium transition-colors">
+    <a href="/projects" class="inline-block text-cyan-400 hover:text-cyan-300 text-sm font-medium transition-colors">
       View All Projects &rarr;
     </a>
   </div>

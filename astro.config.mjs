@@ -2,10 +2,10 @@ import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
 import tailwindcss from "@tailwindcss/vite";
 
-// https://astro.build/config
-export default defineConfig({
-  site: "https://pancadrya.github.io",
-  base: "/portfolio", // Sesuai dengan repo GitHub-mu
+/astro.build/config
+https: export default defineConfig({
+  site: "https://pancadrya.my.id",
+  base: "/",
 
   // mdx masuk ke integrations
   integrations: [mdx()],
