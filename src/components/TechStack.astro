@@ -50,7 +50,7 @@ const tools = [
 
   <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
     {coreExpertise.map((item) => (
-      <div class={`${item.span} p-6 bg-gray-900/40 border border-gray-800 rounded-2xl hover:border-cyan-500/50 transition-all group overflow-hidden relative`}>
+      <div class={`${item.span} p-6 bg-gray-900/40 border border-gray-800 rounded-2xl hover:border-cyan-500/50 transition-all group overflow-hidden relative flex flex-col items-center justify-center text-center`}>
         <div class="text-3xl mb-4">{item.icon}</div>
         <h3 class="text-xl font-bold text-gray-100 group-hover:text-cyan-400 transition-colors mb-2">{item.title}</h3>
         <p class="text-sm text-gray-400 leading-relaxed">{item.desc}</p>
