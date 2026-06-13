@@ -19,7 +19,7 @@ const digitalGardenCollection = defineCollection({
   schema: z.object({
     title: z.string(),
     publishDate: z.coerce.date(),
-    awsServices: z.array(z.string()),
+    tags: z.array(z.string()).default([]),
     description: z.string(),
   }),
 });

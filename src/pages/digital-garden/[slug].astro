@@ -29,7 +29,7 @@ const { Content } = await render(note);
     <!-- Header Artikel -->
     <header class="mb-12 border-b border-gray-800 pb-8">
       <div class="flex flex-wrap gap-2 mb-6">
-        {note.data.awsServices.map((service) => (
+        {note.data.tags.map((service) => (
           <span class="inline-flex items-center justify-center px-3 py-1.5 text-xs font-medium rounded-full bg-cyan-950/30 text-cyan-400 border border-cyan-800/50 whitespace-nowrap">
             {service}
           </span>

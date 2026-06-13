@@ -30,16 +30,16 @@ const recentNotes = sortedNotes.slice(0, 3);
         <!-- AWS Services Tags -->
        <div class="flex gap-2 mb-4 flex-wrap overflow-hidden">
           {/* 1. Ambil maksimal 2 chip pertama */}
-          {note.data.awsServices.slice(0, 2).map((tech) => (
+          {note.data.tags.slice(0, 2).map((tech) => (
             <span class="inline-flex items-center justify-center px-2.5 py-1 text-[11px] font-medium rounded-full bg-cyan-950/30 text-cyan-400 border border-cyan-800/50 whitespace-nowrap truncate max-w-[120px]">
               {tech}
             </span>
           ))}
           
           {/* 2. Hitung sisanya, jika lebih dari 0, tampilkan chip "+" */}
-          {note.data.awsServices.length > 2 && (
+          {note.data.tags.length > 2 && (
             <span class="inline-flex items-center justify-center px-2 py-1 text-[11px] font-medium rounded-full bg-gray-900 text-gray-400 border border-gray-800 whitespace-nowrap shrink-0">
-              +{note.data.awsServices.length - 2}
+              +{note.data.tags.length - 2}
             </span>
           )}
         </div>
