@@ -15,10 +15,13 @@ import Footer from '../components/Footer.astro';
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" type="image/x-icon" href="/favicon_2.ico" />
     <title>Pancadrya Portfolio | Cloud & AI</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">    
     <ClientRouter/>
   </head>
   <body class="bg-gray-950 text-gray-100 antialiased selection:bg-cyan-500 selection:text-gray-950">
-    <!-- Ubah py-10 md:py-20 menjadi pt-8 md:pt-12 pb-20 -->
     <Navbar />
     <div class="mx-auto max-w-5xl px-6 md:px-12 pt-8 md:pt-12 pb-20">
       <slot />
